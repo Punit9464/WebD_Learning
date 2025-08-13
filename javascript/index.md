@@ -1,5 +1,5 @@
 # What is JavaScript ?
-- High Level - nearer to human language
+- High Level programming language - nearer to human language
 - dyanmically typed - change type in run time
 - Single threaded - works over a single process 
 - Interpreted or Just In Time Compiled (Not a Compiled Language)
