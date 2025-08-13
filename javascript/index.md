@@ -77,6 +77,8 @@ z = 50; // reassign
 ### Let
 - was introduced in ES6
 - It is Block Scoped.
+- Memory is allocated in Lexical Environment, during creation of execution context.
+- Marked as `<unintialized>` in Lexical environment or execution context while in TDZ.
 ```js
 if(true){
     let a = 10;
@@ -86,12 +88,16 @@ console.log(a); //Reference Error: a is not defined.
 - Hoisted but it is in **Temporal Dead Zone**. Thus, we cannot access the variable before it's declared.
 - Reassignment: We can re-assign a let variable but not re-declare.
 #### Temporal Dead Zone
-Time between entering the scope and actual declaration, it's a feature that enforces safer and more predictable variable usage.
+- Time between entering the scope and actual declaration, it's a feature that enforces safer and more predictable variable usage.
+- Exists in Lexical Environment which is a part of Global Execution Context.
+
 
 ### Const
 - It is Block Scoped
 - hoisting is same as `let`
 - Reassignment and redeclaration is not possible.
+- Memory is allocated in Lexical Environment, during creation of execution context.
+- Marked as `<unintialized>` in Lexical environment or execution context while in TDZ.
 ```js
 const x = 90;
 x = 1000; // TypeError: Assignment to constant variable.
@@ -172,7 +178,7 @@ function main() {
 
 Example 3: In Node.js Environment - if we do only console outside of any scope.
 ```js
-console.log(this); // this -> {}
+console.log(this); // this -> {} empty object
 ```
 
 Example 4: Standalone Arrow function
@@ -181,6 +187,24 @@ const main = () => {
     console.log(this); // {}
     console.log(this.undefined) //undefined
 }
+```
+
+### Explicit binding of `call`, `apply`, `bind`.
+- `call`, `apply` -> binds the given object to the function and calls the function
+- `bind` -> binds the given object permenantly to the `this` of the function and returns the function.
+
+```js
+function greet(greeting) {
+    console.log(`${greeting}, ${this.name}`);
+}
+
+const user = { name: "Punit" };
+
+greet.call(user, "Hello"); // Hello, Punit
+greet.apply(user, ["Hi"]); // Hi, Punit
+
+const bindedFunction = greet.bind(user);
+bindedFunction("Hey"); // Hey, Punit
 ```
 
 # Higher Order Functions
@@ -254,7 +278,7 @@ localStorage.clear();
 #### Session Storage
 - Stores data for single session.
 - Data is cleared when tab is closed.
-- Useful for storing temporary data.
+- Useful for storing temporary data`    .
 ```js
 sessionStorage.setItem("name", "Punit");
 ```
