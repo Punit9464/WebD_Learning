@@ -87,6 +87,7 @@ function createCounter() {
 }
 
 const counterA = createCounter();
+
 console.log(counterA()); // 1
 console.log(counterA()); // 2
 ```
