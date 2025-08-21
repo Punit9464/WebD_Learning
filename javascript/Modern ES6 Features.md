@@ -70,6 +70,115 @@ const updatedUser = {
 
 console.log(updatedUser); // { name: "Punit", age: 20, city: "Chandigarh" }
 ```
-
+<br><br>
 
 # Rest Operator
+- It allows a function to take indefinite number of arguments as an array.
+- Defined by `...parameterName` 
+- We can use array methods on it.
+- It is always the last parameter of a function. -> 
+```js
+function (a, b, ...args) {}
+```
+
+
+### Diff between Rest and Spread
+- Rest parameters (...) are used in function definitions to gather an indefinite number of arguments into an array.
+
+- Spread syntax (...) is used in function calls or array literals to expand an iterable (like an array) into individual elements.
+
+<br><br>
+
+# Template Literals
+- Feature in JS that provide a more flexible and readable way to create strings.
+- They are defined using backticks (`)
+
+### String interpolation
+- It allows us to embed expressions directly within a template literal.
+- Use `${expression}` to insert a value.
+- Alternative for string concatenation
+```js
+const name = 'Punit';
+const greeting = `Hello ${name}!`
+console.log(greeting); // Hello Punit
+```
+
+
+### Multi line Strings
+- It simplify creating strings that have span multiple lines.
+- No need to use `\n` characters.
+```js
+const multilineString = `
+Hello 
+Punit
+`;
+
+console.log(multilineString);
+```
+
+
+<br><br>
+
+# Import / Export 
+
+## Export
+- This is used to export classes, functions, variables etc from a module to be used in another module.
+
+### Named Exports
+- Allows to export multiple values from a single module.
+- When importing you must use the same name.
+
+```js
+export const PI = 3.14
+export function greet() {
+    return "Hello";
+}
+
+// OR
+
+const PI = 3.14;
+function greet() {
+    return "Hello";
+}
+
+export { PI, greet };
+```
+
+### Default Exports
+- Exports a single value from a module.
+- Only one default export per module.
+- Don't need to use { } when importing a default value.
+- Can give any name while importing.
+
+```js
+const PI = 3.14;
+
+export function() {}// named export
+
+export default PI; // default export
+```
+
+## Import
+- Used to bring a exported value from another module into current module.
+
+### Named Imports
+- to import the named exports, you must use the same name and encclose the names in curly braces.
+```js
+import { PI, greet } from 'my-module.js';
+```
+
+### Default Import
+- to import a default export, you provide a name for it directly without using `{}`.
+```js
+import PI from 'my-module.js';
+```
+
+### Mixed
+```js
+import defaultExport, { nameImport1, namedImport2 } from 'my-module.js';
+```
+<br><br>
+
+# Tree Shaking
+- Tree shaking = removing unused code from your final JavaScript bundle during the build process (usually with Webpack, Rollup, ESBuild, etc.). It relies on ES6 import/export being static and analyzable.
+- This significantly reduces the size of application bundle, leading to faster loading times and better performance.    

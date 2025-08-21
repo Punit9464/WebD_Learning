@@ -24,6 +24,9 @@
 - **MicroTask Queue** - This queue is for tasks with a higher priority like promises(.then(), .catch()) and async/await.
 - The event loop processes all microtasks queue tasks before moving to next macrotask.
 
+
+**NOTE:** `MicroTask Priority > MacroTask Priority`
+
 # Event Loop Life Cycle
 - `Call Stack Empty ➡️ Run one Macrotask ➡️ Run all Microtasks ➡️ Render ➡️ Repeat`
 
@@ -31,6 +34,7 @@
 - The JavaScript engine completes the current function on the call stack. The stack must be empty before the Event Loop can do anything.
 
 - In one event loop life cycle,
+    - The Event Loop first checks microtask queue after the stack is empty, if some task is left there, it executes it.
 
     - The Event Loop picks one macrotask from the macrotask queue and pushes it onto the call stack.
 
