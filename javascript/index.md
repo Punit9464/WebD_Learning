@@ -240,6 +240,19 @@ console.log(doubledNums); // [2, 4, 6];
     1. Asynchronous functions
     2. Encapsulation
 
+## Callback Hell (aka "Pyramid of Doom")
+- Happens when u have too many nested callbacks, because each async operation depends on previous one.
+```js
+getDataFromDB((data) => {
+  processData(data, (processed) => {
+    saveProcessedData(processed, (result) => {
+      console.log('Done!', result);
+    });
+  });
+});
+```
+- To Avoid this pyramid structure, we prefer `Promises` or `async/await`.
+
 # Client Side APIs
 
 Navigator - Browser Object that gives info about Browser and user environment.

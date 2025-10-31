@@ -8,6 +8,10 @@
 - Useful when calculating the initial value is expensive
 
 ```js
+// so rather than
+// const [count, setCount] = useState(expensiveFun()); -> renders every time so to prevent it we use 
+// lazy initial state -> renders only once 
+
 const [count, setCount] = useState(() => expensivefunc());
 ```
 
@@ -61,6 +65,8 @@ function useAuth(){
     return getUser;
 }
 
+// const useAuth = () => useContext(authContext);
+
 function AuthProvider({ children }){
 
     return (
@@ -72,9 +78,143 @@ function AuthProvider({ children }){
     )
 }
 ```
-- **Performance Consideration** - Change in Context Value triggers a re-render of all components consuming that context. To mitigate this, use `useMemo` to memoize the value we pass the provider or break ur context into smaller more specific contexts.
+- **Performance Consideration** - Change in Context Value triggers a re-render of all components consuming that context, even if they don't use that value. To mitigate this, use `useMemo` to memoize the value we pass the provider or break ur context into smaller more specific contexts.
+
+
+# useMemo
+- It lets you cache the prev result between the re-renders
+```jsx
+const cachedValue = useMemo(calculatedValue, [dependencies])
+```
+
+- Now if while re-rendering the dependecy is same then it will not recompute the calculated value
+- Generally, React rerenders componenets whenever state or props chnges, meaning all calculations run again. That can decrease performance when an expensive function recalculates everytime, even though having same argument 
+
+
+```jsx
+
+import { useMemo, useState } from "react";
+
+function ExpensiveComponent() {
+  const [count, setCount] = useState(0);
+  const [show, setShow] = useState(true);
+
+  const expensiveValue = useMemo(() => {
+    console.log("Calculating...");
+    let sum = 0;
+    for (let i = 0; i < 1000000000; i++) sum += i;
+    return sum + count;
+  }, [count]); // Only re-run when count changes
+
+  return (
+    <div>
+      <h2>Expensive Value: {expensiveValue}</h2>
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+      <button onClick={() => setShow(!show)}> 
+        {show ? "Hide" : "Show"}
+      </button>
+    </div>
+  );
+}
+
+```
+
+✅ Without useMemo:
+
+That huge loop runs every render, even when toggling show.
+
+✅ With useMemo:
+
+The loop runs only when count changes.
+
+Toggling show (unrelated state) doesn’t re-run the heavy computation.
+
+- Thus improves performance
+    - when component renders frequently
+    - when component rendering is expensive
+    - when props rarely chnge
+
+```
+| Concept                 | What it checks                                                              |
+| ----------------------- | --------------------------------------------------------------------------- |
+| `useEffect(fn, [x])`    | React re-runs `fn` when `x` changes                                         |
+| `useMemo(fn, [x])`      | React recomputes memoized value when `x` changes                            |
+
+```
 
 # useReducer
 - Used for managing complex state logic in functional components.
 - Alternative to useState and is helpful when state depends on prev states or multiple related state variables
-- 
+
+```jsx
+const [state, dispatch] = useReducer(reducerFunction, initialState);
+
+// dispatch -> as a setter of useState
+// state -> new state
+// reducerFunction -> function that decides how state changes
+````
+
+Example:
+```jsx
+import {useReducer} from 'react'
+function reducer(prevState, action) {
+    switch(action.type) {
+        case "increment":
+            return { count: prevState.count + 1 }; 
+            // we can also deconstruct here if we have an object in our state => {...prevState, ...newState}, here we have only single element so no need to deconstruct
+        
+        case "decrement":
+            return {count  : prevState.count - 1};
+        
+        case "reset"
+            return {count : 0 };
+
+        default : return prevState;
+    }
+}
+
+export default function Counter() {
+const [state, dispatch] = useReducer(reducer, {count : 0});
+
+return (
+    <div>
+        <h1>{state.count}</h1>
+        <button onClick={() => dispatch({ type: "decrement" })}>-</button>
+        <button onClick={() => dispatch({ type: "increment" })}>+</button>
+        <button onClick={() => dispatch({ type: "reset" })}>Reset</button>
+    </div>
+);
+}
+```
+
+```jsx
+function formReducer(state, action) {
+  switch (action.type) {
+    case "CHANGE_INPUT":
+      return { ...state, [action.field]: action.value };
+    case "RESET":
+      return { name: "", email: "" };
+    default:
+      return state;
+  }
+}
+
+function Form() {
+  const [state, dispatch] = useReducer(formReducer, { name: "", email: "" });
+
+  const handleChange = (e) => {
+    dispatch({ type: "CHANGE_INPUT", field: e.target.name, value: e.target.value });
+  };
+
+  return (
+    <form>
+      <input name="name" value={state.name} onChange={handleChange} />
+      <input name="email" value={state.email} onChange={handleChange} />
+      <button type="button" onClick={() => dispatch({ type: "RESET" })}>Reset</button>
+    </form>
+  );
+}
+```
+
+
+- It is called useReducer Because it’s based on the “reducer” pattern — a pure function that reduces (combines) a current state and an action into a new state.

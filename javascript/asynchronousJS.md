@@ -236,6 +236,7 @@ async function getData() {
 
 # Fetch API
 - `fetch` is a moden JS API to deal with network requests.
+- Build in JavaScript function
 - It returns a `promise` that resolves to **Response** object, representing the result of the request.
 - It is asynchronous
 - Only rejects its Promise for network errors, doesn't rejects for HTTP status codes like `500-Internal Server Error`. Thus for that, we explicitly check `response.ok`.
@@ -245,10 +246,14 @@ async function getData() {
 async function fetchData(url) {
     try{
         const response = await fetch(url, {
-            method: "GET", // can be "POST", "DELETE", "PUT"
+            method: "POST", // can be "POST", "DELETE", "PUT"
             headers: {
                 "Content-Type": "application/json"
-            }
+            },
+            body: JSON.stringify({
+                name: "Punit",
+                age: 20
+            })
         });
 
         // check for HTTP Errors (4xx, 5xx)
