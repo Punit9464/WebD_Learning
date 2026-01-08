@@ -56,6 +56,7 @@ try {
 ```
 
 
+
 # Error object properties
 - Error obj provides standard set of properties that gives more info about wht went wrong 
 1. `name` - name of the error type.

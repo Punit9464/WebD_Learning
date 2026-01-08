@@ -182,3 +182,4 @@ import defaultExport, { nameImport1, namedImport2 } from 'my-module.js';
 # Tree Shaking
 - Tree shaking = removing unused code from your final JavaScript bundle during the build process (usually with Webpack, Rollup, ESBuild, etc.). It relies on ES6 import/export being static and analyzable.
 - This significantly reduces the size of application bundle, leading to faster loading times and better performance.    
+

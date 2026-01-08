@@ -145,7 +145,7 @@ eg: Numbers = Float + Int, Strings,  Boolean, Null, Undefined, Symbol, BigInt.
     ```
     - Not Hoisted - similar to let, const
     - Inherits `this` from outer scope
-    - No Arguements
+    - No Arguements object
     - Introduced in ES6
 
 ## `this` Context in Arrow Functions and General Functions
@@ -185,13 +185,13 @@ Example 4: Standalone Arrow function
 ```js
 const main = () => {
     console.log(this); // {}
-    console.log(this.undefined) //undefined
+    console.log(this.username) //undefined
 }
 ```
 
 ### Explicit binding of `call`, `apply`, `bind`.
 - `call`, `apply` -> binds the given object to the function and calls the function
-- `bind` -> binds the given object permenantly to the `this` of the function and returns the function.
+- `bind` -> binds the given object permanently to the `this` of the function and returns the function.
 
 ```js
 function greet(greeting) {

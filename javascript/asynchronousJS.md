@@ -12,7 +12,7 @@
 # JS Engine vs Web APIs
 - Both are ditstinct but work together in browser's JS runtime environment (similar in Node js but there rather than browser web apis, node js environment have **Node.js Core APIs**)
 - The JS Engine is the core program that executes JavaScript code, while Web APIs are functionalities provided by the browser that extend the capabilities of the core language.
-- Web APIs are set of interfaces built into the browser that allow JS to interact with browser and computer's environment
+- Web APIs are set of interfaces built into the browser that allow JS to interact with browser and computer's environment 
     - Example - DOM, Fetch API, timers, geolocation APIs
 
 - The JS environments is the one that holds all these components together. Thus when js engine encounters the Web APIs function, it doesn't execute the function itself , it hands the task off to the Web APIs, which are handled by the browser's own internal threads. Js engine then moves to the next task in the call stack
