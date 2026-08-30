@@ -55,7 +55,7 @@
 - `fulfilled` - Operation completed Successfully, `Promise` now contains the result.
 - `rejected` - Operation failed, `Promise` now contains failure reason.
 
-**Once**, a promise is either fulfilled or rejected it si considered as **settled**. A settled promise doesn't change its state again.
+**Once**, a promise is either fulfilled or rejected it is considered as **settled**. A settled promise doesn't change its state again.
 
 
 ### Instance Methods
@@ -91,7 +91,7 @@ promise
 
 
 ### Static Methods
-- These methods can be directly called on `Promise` constructor (no need to create promise object) and are used to manage multiple multiple promises simultaneously.
+- These methods can be directly called on `Promise` constructor (no need to create promise object) and are used to manage multiple promises simultaneously.
 
 1. **Promise.all()**:
     - Takes an iterable (like an array) of promises and returns a single promise.

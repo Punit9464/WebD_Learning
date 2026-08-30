@@ -13,6 +13,13 @@
 // lazy initial state -> renders only once 
 
 const [count, setCount] = useState(() => expensivefunc());
+
+/**
+ *  Even if count is set as const but still setCount will be 
+ *  able to update the value of count because it creates
+ *  a new binding of that variable i.e a new variable is created and old one is deleted 
+ *  when component is re rendered.
+ * /
 ```
 
 
@@ -60,23 +67,26 @@ import { useContext, createContext } from 'react';
 
 const authContext = createContext();
 
-function useAuth(){
-    const getUser = useContext(authContext);
-    return getUser;
-}
-
-// const useAuth = () => useContext(authContext);
 
 function AuthProvider({ children }){
-
+  // api for accessing user from backend
     return (
 
-        <authContext.Provider value = {{ user , isLoading}}>
+        <authContext.Provider value = {{ user , isLoading }}>
             {children}
         </authContext.Provider>
 
     )
 }
+
+export function useAuth(){
+    const getUser = useContext(authContext);
+    return getUser;
+}
+
+// or
+
+// const useAuth = () => useContext(authContext);
 ```
 - **Performance Consideration** - Change in Context Value triggers a re-render of all components consuming that context, even if they don't use that value. To mitigate this, use `useMemo` to memoize the value we pass the provider or break ur context into smaller more specific contexts.
 
@@ -137,8 +147,22 @@ Toggling show (unrelated state) doesn’t re-run the heavy computation.
 ```
 | Concept                 | What it checks                                                              |
 | ----------------------- | --------------------------------------------------------------------------- |
-| `useEffect(fn, [x])`    | React re-runs `fn` when `x` changes                                         |
+| `useEffect(fn, [x])`    | React re-runs `fn` when `x` changes , it can't memoize the value                                       |
 | `useMemo(fn, [x])`      | React recomputes memoized value when `x` changes                            |
+
+```
+
+```useMemo stores only ONE previous value — the last computed value.```
+
+# useRef
+- Creates a mutable reference object that persists across re-renders.
+- Returns an object which has property .current
+- `.current` property holds the value that doesn't trigger re - rendering.
+- Eg, Focus Inputs, Timers etc. 
+
+```jsx
+const ref = useRef(initialValue);
+ref.current = newValue;
 
 ```
 
@@ -152,7 +176,7 @@ const [state, dispatch] = useReducer(reducerFunction, initialState);
 // dispatch -> as a setter of useState
 // state -> new state
 // reducerFunction -> function that decides how state changes
-````
+```
 
 Example:
 ```jsx

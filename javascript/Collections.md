@@ -42,5 +42,5 @@ console.log(userMap.size);     // Output: 3
     uniqueNumbers.add(1); // This is ignored
 
     console.log(uniqueNumbers.has(2)); // Output: true
-    console.log(uniqueNumbers.size);   // Output: 2`
+    console.log(uniqueNumbers.size);   // Output: 2` 
     ```

@@ -44,6 +44,11 @@ npm install react-redux @reduxjs/toolkit
 4. Store updates the state
 5. React re-renders components subscribed to that part of state (useSelector)
 
+
+## Architecture Understanding
+![Redux Architecture Image](./Redux_Architecture.png)
+
+
 ## Steps
 1. First Install 
 ```bash

@@ -1,5 +1,5 @@
 # Code Splitting And Lazy Loading
-When we build a React App everything we write that builds up into a bundle.js -> A large javascript file, that loads on the client side to display the components -> Slow initial load.
+When we build a React App, everything we write that builds up into a bundle.js -> A large javascript file, that loads on the client side to display the components -> Slow initial load.
 
 Goal: Load only when it's needed now, and fetch other parts later when needed. That's Code Splitting + Lazy Loading.
 

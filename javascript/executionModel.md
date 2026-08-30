@@ -10,7 +10,14 @@
     2. **Interpreting** - AST is interpreted and bytecode is generated.
     3. **Compilation** - Bytecode is compiled into optimized machine code.
 
-- **Memory Heap** = 
+```ruby
+Every JavaScript file is first parsed into an AST.
+The interpreter then converts the AST into bytecode and executes that bytecode immediately (no need to convert it into machine code)
+While execution is happening, the engine profiles the code.
+If some parts become hot, the JIT compiler compiles only those parts into optimized machine code, and future executions of those parts run directly as machine code.
+```
+
+- **Memory Heap** 
     1. Basically storage for non primitive data type, that doesn't have fixed size.
     2. It is unstructured.
     3. Garbage collector manages memory in heap.

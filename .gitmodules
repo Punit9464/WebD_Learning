@@ -1,0 +1,9 @@
+[submodule "Agentic AI/AI Agent (Basic)"]
+	path = Agentic AI/AI Agent (Basic)
+	url = https://github.com/Punit9464/A-Basic-AI-Agent
+[submodule "Agentic AI/Basic Todo Agent"]
+	path = Agentic AI/Basic Todo Agent
+	url = https://github.com/Punit9464/Todo-AI-Agent
+[submodule "Agentic AI/Basic Support Agent"]
+	path = Agentic AI/Basic Support Agent
+	url = https://github.com/Punit9464/Basic-Support-Agent

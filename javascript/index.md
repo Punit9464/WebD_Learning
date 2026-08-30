@@ -4,6 +4,13 @@
 - Single threaded - works over a single process 
 - Interpreted or Just In Time Compiled (Not a Compiled Language)
 
+### JIT
+- JavaScript uses JIT compilation to improve performance.
+Although JavaScript is traditionally an interpreted language, modern JS engines first interpret the code for quick execution and then use Just-In-Time compilation to convert frequently executed parts into optimized machine code. This allows JavaScript to remain flexible while achieving near-compiled performance.
+
+- JIT compiles only frequently executed (hot) parts of the code, not the entire file.
+The rest remains interpreted to ensure fast startup and flexibility.
+
 # Where JS runs ?
 - Browser 
 - Node.js
@@ -16,6 +23,7 @@
 - Standard template for scripting languages that defines rules, syntax and core features
 - JavaScript is implementation of this blueprint.
 - Es6 is an release of ES.
+- ES6 is the 2015 version of ECMAScript that introduced modern JavaScript features like let/const, arrow functions, classes, modules, and promises to make JavaScript scalable and maintainable.
 
 # Three ways to include JS in html Document
 - Inline:
@@ -291,7 +299,7 @@ localStorage.clear();
 #### Session Storage
 - Stores data for single session.
 - Data is cleared when tab is closed.
-- Useful for storing temporary data`    .
+- Useful for storing temporary data`
 ```js
 sessionStorage.setItem("name", "Punit");
 ```

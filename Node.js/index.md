@@ -6,9 +6,43 @@
 ## Modules
 - It is a reusable peice of code (functions, classes, objects) that you can import/export.
 - Three Types:
-1. Core Modules - Build Node.js Modules -> no installation required (fs, path, http, os, process)
+1. Core Modules - in built Node.js Modules -> no installation required (fs, path, http, os, process)
 2. Local Modules - Our own files
 3. Third-Party modules - Installed via NPM (express)
+
+```js
+// math.js file
+
+function add(a, b) {
+  return a + b;
+} 
+
+function sub(a, b) {
+  return a - b;
+}
+
+module.exports = add; // get's over written
+module.exports = sub; // only this is exported from this module.
+
+
+// Correct Ways:
+module.exports = {
+  add, sub
+}; // -> { add: Function[add], sub: Function[sub] }
+
+// OR
+
+module.exports = {
+  addFn: add,
+  subFn: sub
+}  // -> { addFn: Function[add], subFn: Function[sub] }
+
+// OR
+
+exports.add = (a, b) => a + b;
+exports.sub = (a, b) => a - b;
+// -> { add: Function[anonymous], sub: Function[anonymous] }
+```
 
 <br><br>
 
@@ -18,18 +52,34 @@
 const fs = require('fs');
 
 // writing to a file
-fs.writeFileSync('test.txt','Hey Punit!');
+fs.writeFileSync('test.txt','Hey Punit!'); // -> synchronous way (blocking request)
+fs.writeFile("test.txt", "Hey There Async Word", (err, result) => console.log(result)); // -> asynchronous way (non blocking request)
+fs.appendFileSync('test.txt', new Date().getDate().toLocaleString());
+fs.appendFile('test.txt', Date.now().toString(), (err) => { console.error(err) });
 
 // reading a file
 const data = fs.readFileSync('test.txt', 'utf-8');
- //-> async version
+//-> async version
 fs.readFile('test.txt', 'utf-8', (err, data) => {
     if(err) throw Error('error while reading file');
     else console.log(data);
 });
 
+// copying a file
+fs.cpSync('contacts.txt', "new_Contacts_Copy.txt");
+fs.cp('contacts.txt', "new_Contacts_Copy.txt", (err) => console.error(err));
+
 // deleting a file
 fs.unlinkSync('test.txt');
+fs.unlink("test.txt", (err) => console.error(err));
+
+// Viewing whole stats of a file like when it was modified when edited created etc
+console.log(fs.statSync("test.txt"))
+console.log(fs.statSync("test.txt").isFile()) // -> returns true
+
+// make a directory
+fs.mkdirSync("my-docs");
+fs.mkdirSync("my-docs/a/b", { recursive: true }); // -> creates two inner folders inside my-docs of name a then inside it b
 ```
 - Sync: waits for the operation
 - Async: non blocking (recommended)

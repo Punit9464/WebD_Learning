@@ -162,7 +162,7 @@ export default PI; // default export
 - Used to bring a exported value from another module into current module.
 
 ### Named Imports
-- to import the named exports, you must use the same name and encclose the names in curly braces.
+- to import the named exports, you must use the same name and enclose the names in curly braces.
 ```js
 import { PI, greet } from 'my-module.js';
 ```

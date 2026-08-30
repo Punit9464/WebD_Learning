@@ -54,6 +54,9 @@ p.children   // HTML collection of all element nodes
 
 p.childNodes   // NodeList of all nodes 
 
+// HTMLCollection → HTML only + Live
+// NodeList → Nodes + Mostly Static
+
 
 // can access specific node using index
 ```
@@ -79,7 +82,7 @@ document.getElementsByTagName("p") // Returns HTMLCollection by tags
 // we mention css selectors here like #idName, .className, tagName
 document.querySelector('css-selector'); // returns the first matching element
 
-document.querySelectorAll('css-selector'); // returns all the elements in HTMLCollection of the matching css selector
+document.querySelectorAll('css-selector'); // returns all the elements in NodeList of the matching css selector
 ```
 
 ## Manipulating Elements
@@ -96,7 +99,7 @@ document.querySelectorAll('css-selector'); // returns all the elements in HTMLCo
     let element = document.querySelector("#mansi");
     console.log(element.innerHTML); // access the inner HTML
     element.innerHTML = `<a href=""> </a>` // chnges the text + html inside element
-
+    ```
 
 ## Manipulating Element Attributes
 - We can get, set, remove attributes of an element
@@ -208,6 +211,23 @@ console.log(span.closest("#container")); // <div id="container">
     // event: type of event to listen -> click, hover
     // function -> handler function that executes
     // useCapture ->  optional boolean value (by default false), determines the event flow phase, whether it will execute in capture time or bubbling time.
+
+    const btn = document.querySelector("button");
+
+    function handler1() {
+    console.log("Handler 1");
+    }
+
+    function handler2() {
+    console.log("Handler 2");
+    }
+
+    btn.addEventListener("click", handler1);
+    btn.addEventListener("click", handler2);
+
+    // remove only handler1
+    btn.removeEventListener("click", handler1);
+
     ```
 
 
